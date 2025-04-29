@@ -3,7 +3,7 @@ from playwright.async_api import async_playwright
  
 async def create_session():
     async with async_playwright() as p:
-        browser = await p.chromium.launch_persistent_context(
+        browser = await p.firefox.launch_persistent_context(
             user_data_dir='./user_session', headless=False
         )
         page = await browser.new_page()
@@ -13,14 +13,14 @@ async def create_session():
         input("Please log in manually, then press Enter here to save your session...")
         
         # Save cookies and LocalStorage into a storage state file
-        await page.context.storage_state(path="storage_state.json")
+        await browser.storage_state(path="storage_state.json")
         
         await browser.close()
  
 async def reuse_session():
     async with async_playwright() as p:
         # Load the previously saved storage state
-        browser = await p.chromium.launch(headless=False)
+        browser = await p.firefox.launch(headless=False)
         context = await browser.new_context(storage_state="storage_state.json")  # Load cookies and LocalStorage
         
         page = await context.new_page()
