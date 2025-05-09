@@ -62,7 +62,7 @@ class TravelAllowanceFetcher:
                 await page.wait_for_selector('text=Available Expenses', timeout=60000)
                 await page.goto('https://us2.concursolutions.com/nui/expense#available-expenses');
                 await page.click('text=Active Reports')
-                await page.click('text=Last 90 Days')
+                await page.click('text=This Year')
                 await page.click('text=Kickoff of AII Lab Spring CohortNo: G6T88Z / ID: 6B3FFE88DC74445E8C82')
                 await page.click('button:has-text("Travel Allowance")')
                 await page.get_by_role('menuitem', name='View Travel Allowance').click()
